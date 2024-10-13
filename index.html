@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nembak Cewek</title>
+    <style>
+        /* Reset dan Styling Dasar */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Container Utama */
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        /* Styling Gambar */
+        img {
+            width: 150px; /* Mengurangi ukuran gambar */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Styling Judul dan Paragraf */
+        h1 {
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        /* Styling Tombol */
+        .button {
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        #accept {
+            background-color: #32cd32;
+            color: white;
+            position: relative; /* Tetap di tempat */
+            z-index: 1;
+        }
+
+        #decline {
+            background-color: #ff6347;
+            color: white;
+            position: fixed; /* Posisi tetap di layar */
+            top: 80%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; 
+            z-index: 2; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="WhatsApp Image 2024-10-13 at 11.36.18_d9bd4210.jpg" alt="Gambar">
+        <h1>Kamu mau gak?</h1>
+        <p>Jadi pacarku? 😉😙</p>
+
+        <button id="accept" class="button">Terima</button>
+        <button id="decline" class="button">Tolak</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="thankYouModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p style="font-size: 20px; color: #333;">Terima kasih sayang! 😊</p>
+        </div>
+    </div>
+
+    <script>
+        const declineButton = document.getElementById("decline");
+        const acceptButton = document.getElementById("accept");
+        const modal = document.getElementById("thankYouModal");
+        const closeModal = document.querySelector(".close");
+
+        // Fungsi untuk memindahkan tombol "Tolak"
+        declineButton.addEventListener("mouseover", function() {
+            const buttonWidth = declineButton.offsetWidth;
+            const buttonHeight = declineButton.offsetHeight;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            // Menghitung posisi baru agar tombol tetap terlihat
+            const x = Math.random() * (windowWidth - buttonWidth - 20);
+            const y = Math.random() * (windowHeight - buttonHeight - 20);
+
+            declineButton.style.left = `${x}px`;
+            declineButton.style.top = `${y}px`;
+        });
+
+        // Fungsi untuk menampilkan modal saat tombol "Terima" diklik
+        acceptButton.addEventListener("click", function() {
+            modal.style.display = "block";
+        });
+
+        // Fungsi untuk menutup modal saat tombol close diklik
+        closeModal.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+
+        // Menutup modal jika klik di luar konten modal
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
